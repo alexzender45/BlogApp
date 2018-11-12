@@ -2,16 +2,18 @@ const express  = require("express"),
       bodyParser = require("body-parser"),
       expressSanitizer = require("express-sanitizer");
       app      = express(),
-      methodOverride = require("method-override"),
+      methodOverride = require("method-override")
       mongoose = require("mongoose");
-     
 
-      mongoose.connect("mongodb://localhost/Flower_site");
+      mongoose.connect(process.env.flower);
       app.set("view engine", "ejs");
       app.use(express.static("public"));
       app.use(bodyParser.urlencoded({extended: true}));
       app.use(expressSanitizer());
       app.use(methodOverride("_method"));
+
+      const url = process.env.DATABASEURL ||  " mongodb://localhost/Flower_site"
+    mongoose.connect(url);
 // mongoose/model config
 const blogSchema = new mongoose.Schema({
     title : String,
@@ -48,7 +50,7 @@ app.get("/blogs", function(req, res){
  });
 // Create Routes
 app.post("/blogs", function(req, res){
-    req.body.blog.body = req.sanitizer(req.body.blog.body);
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.create(req.body.blog, function(err, newBlog){
         if(err){
             res.render("new");
