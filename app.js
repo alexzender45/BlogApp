@@ -10,7 +10,7 @@ const express  = require("express"),
       app.use(express.static("public"));
       app.use(bodyParser.urlencoded({extended: true}));
       app.use(expressSanitizer());
-      app.use(methodOverride("_method"));
+      app.use(methodOverride("_method"))
 
       const url = process.env.DATABASEURL ||  " mongodb://localhost/Flower_site"
     mongoose.connect(url);
