@@ -6,6 +6,8 @@ const express               = require("express"),
       methodOverride        = require("method-override")
       mongoose              = require("mongoose");
 
+      port                  = process.env.PORT || 8080
+      dotenv.config();
       app.set("view engine", "ejs");
       app.use(express.static("public"));
       app.use(bodyParser.urlencoded({extended: true}));
@@ -109,6 +111,6 @@ Blog.findByIdAndRemove(req.params.id, function(err){
 
 
 
-       app.listen(5555, function(){
-           console.log("server 5555 has started");
-       });
+app.listen(process.env.PORT || 5555, function(){
+    console.log("server 5555 has started");
+});
