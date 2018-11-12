@@ -1,18 +1,18 @@
-const express  = require("express"),
-      bodyParser = require("body-parser"),
-      expressSanitizer = require("express-sanitizer");
-      app      = express(),
-      methodOverride = require("method-override")
-      mongoose = require("mongoose");
+const express               = require("express"),
+      bodyParser            = require("body-parser"),
+      expressSanitizer      = require("express-sanitizer");
+      app                   = express(),
+      dotenv                = require('dotenv'),
+      methodOverride        = require("method-override")
+      mongoose              = require("mongoose");
 
-      mongoose.connect(process.env.flower);
       app.set("view engine", "ejs");
       app.use(express.static("public"));
       app.use(bodyParser.urlencoded({extended: true}));
       app.use(expressSanitizer());
       app.use(methodOverride("_method"))
 
-      const url = process.env.DATABASEURL ||  " mongodb://localhost/Flower_site"
+      const url = process.env.DATABASEURL ||  "mongodb://localhost/Flower_site"
     mongoose.connect(url);
 // mongoose/model config
 const blogSchema = new mongoose.Schema({
