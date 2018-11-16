@@ -1,10 +1,10 @@
 const express               = require("express"),
       bodyParser            = require("body-parser"),
-      expressSanitizer      = require("express-sanitizer");
       app                   = express(),
       dotenv                = require('dotenv'),
-      methodOverride        = require("method-override")
-      mongoose              = require("mongoose");
+      expressSanitizer      = require("express-sanitizer"),
+      methodOverride        = require("method-override"),
+      mongoose              = require("mongoose"),
 
       port                  = process.env.PORT || 8080
       dotenv.config();
@@ -87,7 +87,7 @@ app.get("/blogs/:id/edit", function(req, res){
 
 // Update Routes
 app.put("/blogs/:id", function(req, res){
-    req.body.blog.body = req.sanitizer(req.body.blog.body);
+    req.body.blog.body = req.sanitize(req.body.blog.body);
 Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
 if(err){
     res.redirect("/blogs");
