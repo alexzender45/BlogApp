@@ -32,7 +32,7 @@ router.get("/", function(req, res){
     })
     
 // Show page
-app.get("/blogs/:id", function(req, res){
+router.get("/blogs/:id", function(req, res){
     Blog.findById(req.params.id, function(err, foundBlog){
         if(err){
             res.redirect("/blogs");
