@@ -4,15 +4,47 @@
         <title>Flower Site</title>
         <link rel = "stylesheet" type = "text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.css">
         <link rel = "stylesheet" type = "text/css" href = "/stylesheets/app.css">
+        <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         </head>
-        <body>
-            <div class = "ui fixed inverted menu">
-                <div class = "ui container">
-                    <div class = "header item"><i class = "code icon"></i>Flowers</div>
-                    <a href = "/" class = "item">Home</a>
-                    <a href = "/blogs/new" class = "item">New Post</a>
+        <body class = "man">
+            <nav class = "navbar navbar-inverse">
+                    <div class="container-fluid">
+                            <div class="navbar-header">
+                              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span> 
+                              </button>
+                            <a class = "navbar-brand">Flower site</a>
+                            <a class = "navbar-brand" href = "/"><span class = "glyphicon glyphicon-home"></span></a>
+                            <a class = "navbar-brand" href = "/blogs/new">New post</a>
+                        </div>
+                        <div class = "collapse navbar-collapse" id = "myNavbar"> 
+                            <ul class = "nav navbar-nav navbar-right">
+                               <% if(!currentUser){ %>
+                                <li><a href = "/register" <span class="glyphicon glyphicon-user"></span>Sign up</a></li>
+                                <li><a href = "/login" <span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                               <% }else{ %>
+                                <li><a href = "#">Sign In As <%= currentUser.username %></a></li>
+                                <li><a href = "/logout">Logout</a></li>
+                              <%  } %>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class = "container">
+                        <% if (error && error.length > 0){ %>
+                    <div class = "alert alert-danger" role = "alert">
+                        <%= error %>
+                    </div>
+                    <% } %>
+                    <% if (success && success.length > 0){ %>
+                    <div class = "alert alert-success" role = "alert">
+                        <%= success %>
+                    </div>
+                    <% } %>
                 </div>
-            </div>
-            <p>from header file</p>
-        
+
+                <script src = "https://code.jquery.com/jquery-2.1.4.js"></script>
+                <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>                    
